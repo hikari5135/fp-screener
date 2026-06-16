@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FP2級 実技試験対策｜個人資産相談業務（金財）</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243460;
+    --gold: #c8a96e;
+    --gold-light: #f5e9d0;
+    --cream: #f8f5ef;
+    --white: #ffffff;
+    --text: #1a2744;
+    --text-muted: #6b7a99;
+    --green: #2a7a4f;
+    --green-light: #e8f5ee;
+    --red: #c0392b;
+    --red-light: #fdf0ee;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --border: #e2ddd5;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  .logo span {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    font-family: 'Noto Sans JP', sans-serif;
+    display: block;
+    letter-spacing: 0.1em;
+  }
+
+  .header-tag {
+    background: var(--purple);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a3a 0%, #2a2a5a 100%);
+    padding: 56px 32px 48px;
+    text-align: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--purple);
+    color: #a78bfa;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 4px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: 32px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em { color: #a78bfa; font-style: normal; }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .hero-stat { text-align: center; }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: #a78bfa;
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .section { margin-bottom: 56px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--navy);
+  }
+
+  .section-num {
+    background: var(--purple);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    color: var(--navy);
+  }
+
+  .diff-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+
+  .diff-3 { background: var(--green-light); color: var(--green); }
+  .diff-2 { background: #fff3e0; color: #e65100; }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .compare-table th {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .compare-table th:first-child { background: var(--navy); color: var(--white); }
+  .compare-table th.col-3 { background: var(--green); color: var(--white); }
+  .compare-table th.col-2 { background: var(--purple); color: var(--white); }
+
+  .compare-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 700; color: var(--navy); background: var(--cream); }
+
+  /* CALC BOX */
+  .calc-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .calc-header {
+    background: #2a2a5a;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .calc-title { color: var(--white); font-size: 15px; font-weight: 500; }
+
+  .calc-badge {
+    background: #a78bfa;
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .calc-toggle { color: #a78bfa; font-size: 18px; transition: transform 0.2s; }
+
+  .calc-body { padding: 24px; display: none; }
+  .calc-body.open { display: block; }
+
+  .case-box {
+    background: var(--purple-light);
+    border-left: 4px solid var(--purple);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .case-box strong { color: var(--purple); }
+
+  .case-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .case-data-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .case-data-item span { font-weight: 700; color: var(--purple); }
+
+  .question-box {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+
+  .step-num {
+    background: #2a2a5a;
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content { flex: 1; }
+  .step-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+
+  .step-formula {
+    background: var(--cream);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    font-family: monospace;
+  }
+
+  .step-answer {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .point-box {
+    background: var(--gold-light);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--navy);
+  }
+
+  .point-box strong { color: #b8860b; }
+
+  /* QUIZ */
+  .quiz-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .quiz-num { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .quiz-q { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 16px; line-height: 1.7; }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+  .quiz-opt {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+    background: var(--cream);
+  }
+
+  .quiz-opt:hover { border-color: var(--purple); background: var(--white); }
+  .quiz-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+  .quiz-explain {
+    display: none;
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+    border-left: 3px solid var(--purple);
+  }
+
+  .quiz-explain.show { display: block; }
+
+  /* CHECKLIST */
+  .checklist {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+    font-size: 12px;
+  }
+
+  .check-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .check-item.checked .check-text { color: var(--text-muted); text-decoration: line-through; }
+
+  .progress-bar {
+    background: var(--border);
+    border-radius: 4px;
+    height: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    background: var(--purple);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+    width: 0%;
+  }
+
+  .progress-text { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, #1a1a3a 0%, #2a2a5a 100%);
+    border-radius: 10px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    color: #a78bfa;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .cta-box p { color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 24px; }
+
+  .cta-btn {
+    display: inline-block;
+    background: #a78bfa;
+    color: var(--white);
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .case-data { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .hero h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    資産形成ナビ
+    <span>FP学習＆実践プラットフォーム</span>
+  </div>
+  <div class="header-tag">FP2級 実技対策</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">個人資産相談業務（金財）</div>
+  <h1>FP2級 <em>実技試験</em>を<br>完全攻略する</h1>
+  <p class="hero-sub">3級より深い計算・事例問題を徹底解説。合格への最短ルート。</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">頻出テーマ</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">練習問題</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">25</div>
+      <div class="stat-label">直前チェック項目</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 3級との違い -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">3級との違いと2級の特徴</div>
+    </div>
+
+    <table class="compare-table">
+      <tr>
+        <th>項目</th>
+        <th class="col-3">3級</th>
+        <th class="col-2">2級</th>
+      </tr>
+      <tr>
+        <td>事例の複雑さ</td>
+        <td>シンプルな家庭設定</td>
+        <td>複数の家族構成・複雑な資産状況</td>
+      </tr>
+      <tr>
+        <td>計算の深さ</td>
+        <td>1〜2ステップの計算</td>
+        <td>複数ステップ・複合計算</td>
+      </tr>
+      <tr>
+        <td>税務</td>
+        <td>基本的な控除・税率</td>
+        <td>複数所得の合算・損益通算</td>
+      </tr>
+      <tr>
+        <td>相続</td>
+        <td>基礎控除の計算のみ</td>
+        <td>相続税額の試算・節税対策まで</td>
+      </tr>
+      <tr>
+        <td>不動産</td>
+        <td>基本知識</td>
+        <td>収益計算・譲渡所得税まで</td>
+      </tr>
+      <tr>
+        <td>提案力</td>
+        <td>知識の確認</td>
+        <td>FPとしての提案・アドバイス</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 2: 頻出計算 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">頻出計算問題（ステップ解説）</div>
+    </div>
+
+    <!-- 計算1：所得税 -->
+    <div class="calc-box">
+      <div class="calc-header" onclick="toggleCalc(this)">
+        <span class="calc-title">① 総所得金額と所得税額の計算</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="calc-badge">最頻出</span>
+          <span class="calc-toggle">＋</span>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="case-box">
+          <strong>【事例】Aさんの収入状況</strong>
+          <div class="case-data">
+            <div class="case-data-item">給与収入：<span>800万円</span></div>
+            <div class="case-data-item">不動産収入：<span>120万円</span></div>
+            <div class="case-data-item">不動産必要経費：<span>50万円</span></div>
+            <div class="case-data-item">社会保険料控除：<span>110万円</span></div>
+            <div class="case-data-item">生命保険料控除：<span>4万円</span></div>
+            <div class="case-data-item">配偶者控除：<span>38万円</span></div>
+            <div class="case-data-item">基礎控除：<span>48万円</span></div>
+          </div>
+        </div>
+        <div class="question-box">【問】Aさんの課税総所得金額を求めよ。</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-label">給与所得を計算（給与所得控除を差し引く）</div>
+              <div class="step-formula">800万円 → 給与所得控除190万円 → 給与所得 610万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-label">不動産所得を計算</div>
+              <div class="step-formula">120万円 − 50万円（必要経費）＝ 70万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-label">総所得金額を合算</div>
+              <div class="step-formula">610万円 ＋ 70万円 ＝ 680万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-label">所得控除の合計を計算</div>
+              <div class="step-formula">110万円 ＋ 4万円 ＋ 38万円 ＋ 48万円 ＝ 200万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-label">課税総所得金額</div>
+              <div class="step-answer">680万円 − 200万円 ＝ 480万円</div>
+            </div>
+          </div>
+        </div>
+        <div class="point-box">
+          <strong>⚠️ 注意：</strong>給与所得控除額は収入金額によって異なる。800万円超の場合は190万円が上限（2020年改正）。試験では控除額の表が与えられる場合が多い。
+        </div>
+      </div>
+    </div>
+
+    <!-- 計算2：譲渡所得 -->
+    <div class="calc-box">
+      <div class="calc-header" onclick="toggleCalc(this)">
+        <span class="calc-title">② 不動産の譲渡所得と税額計算</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="calc-badge">頻出</span>
+          <span class="calc-toggle">＋</span>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="case-box">
+          <strong>【事例】Bさんの不動産売却</strong>
+          <div class="case-data">
+            <div class="case-data-item">売却価格：<span>5,000万円</span></div>
+            <div class="case-data-item">取得費：<span>3,000万円</span></div>
+            <div class="case-data-item">譲渡費用：<span>200万円</span></div>
+            <div class="case-data-item">所有期間：<span>8年（長期）</span></div>
+            <div class="case-data-item">居住用特別控除：<span>3,000万円</span></div>
+          </div>
+        </div>
+        <div class="question-box">【問】Bさんの課税長期譲渡所得金額を求めよ。</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-label">譲渡所得を計算</div>
+              <div class="step-formula">5,000万円 − 3,000万円 − 200万円 ＝ 1,800万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-label">居住用特別控除を適用</div>
+              <div class="step-formula">1,800万円 − 1,800万円（特別控除3,000万円の範囲内）</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-label">課税譲渡所得</div>
+              <div class="step-answer">0円（特別控除で全額控除）</div>
+            </div>
+          </div>
+        </div>
+        <div class="point-box">
+          <strong>💡 ポイント：</strong>所有期間5年超＝長期譲渡所得（税率20.315%）、5年以下＝短期（税率39.63%）。居住用財産の3,000万円特別控除は最重要！
+        </div>
+      </div>
+    </div>
+
+    <!-- 計算3：相続税 -->
+    <div class="calc-box">
+      <div class="calc-header" onclick="toggleCalc(this)">
+        <span class="calc-title">③ 相続税の総額計算</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="calc-badge">頻出</span>
+          <span class="calc-toggle">＋</span>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="case-box">
+          <strong>【事例】Cさんの相続</strong>
+          <div class="case-data">
+            <div class="case-data-item">遺産総額：<span>1億円</span></div>
+            <div class="case-data-item">法定相続人：<span>配偶者・子2人</span></div>
+            <div class="case-data-item">債務・葬式費用：<span>500万円</span></div>
+          </div>
+        </div>
+        <div class="question-box">【問】相続税の課税遺産総額と各相続人の法定相続分を求めよ。</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-label">正味の遺産額を計算</div>
+              <div class="step-formula">1億円 − 500万円 ＝ 9,500万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-label">基礎控除額を計算</div>
+              <div class="step-formula">3,000万円 ＋ 600万円 × 3人 ＝ 4,800万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-label">課税遺産総額</div>
+              <div class="step-formula">9,500万円 − 4,800万円 ＝ 4,700万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-label">法定相続分で按分</div>
+              <div class="step-formula">配偶者：4,700万円×1/2＝2,350万円　子各：4,700万円×1/4＝1,175万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-label">各自の相続税額（速算表より）</div>
+              <div class="step-answer">配偶者：2,350万円×15%-50万円＝302.5万円　子各：1,175万円×15%-50万円＝126.25万円</div>
+            </div>
+          </div>
+        </div>
+        <div class="point-box">
+          <strong>⚠️ 重要：</strong>配偶者の税額軽減により、配偶者は「法定相続分」または「1億6,000万円」のいずれか大きい金額まで非課税。実際の納税額は大幅に減る場合が多い。
+        </div>
+      </div>
+    </div>
+
+    <!-- 計算4：退職所得 -->
+    <div class="calc-box">
+      <div class="calc-header" onclick="toggleCalc(this)">
+        <span class="calc-title">④ 退職所得の計算</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="calc-badge">頻出</span>
+          <span class="calc-toggle">＋</span>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="case-box">
+          <strong>【事例】Dさんの退職</strong>
+          <div class="case-data">
+            <div class="case-data-item">退職金：<span>2,000万円</span></div>
+            <div class="case-data-item">勤続年数：<span>30年</span></div>
+            <div class="case-data-item">役員期間：<span>なし</span></div>
+          </div>
+        </div>
+        <div class="question-box">【問】Dさんの退職所得を求めよ。</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-label">退職所得控除額を計算（勤続20年超）</div>
+              <div class="step-formula">800万円 ＋ 70万円 × （30年 − 20年）＝ 1,500万円</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-label">退職所得を計算</div>
+              <div class="step-formula">（2,000万円 − 1,500万円）× 1/2</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-label">答え</div>
+              <div class="step-answer">250万円</div>
+            </div>
+          </div>
+        </div>
+        <div class="point-box">
+          <strong>💡 公式：</strong>勤続20年以下：40万円×勤続年数（最低80万円）／勤続20年超：800万円＋70万円×（勤続年数−20年）。退職所得は（退職金−控除額）×1/2。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 練習問題 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">過去問形式 練習問題</div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-num">問題 01 ／ タックスプランニング</div>
+      <div class="quiz-q">損益通算において、不動産所得の損失と給与所得を通算する場合、通算できない損失はどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '土地取得のための借入金利子に係る損失が通算不可です。')">① 建物の修繕費による損失</div>
+        <div class="quiz-opt" onclick="answer(this, false, '土地取得のための借入金利子に係る損失が通算不可です。')">② 固定資産税による損失</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解です！土地取得のための借入金利子に相当する損失は損益通算できません。建物部分の利子は通算可能です。')">③ 土地取得のための借入金利子に係る損失</div>
+        <div class="quiz-opt" onclick="answer(this, false, '土地取得のための借入金利子に係る損失が通算不可です。')">④ 管理費による損失</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-num">問題 02 ／ 相続・事業承継</div>
+      <div class="quiz-q">「小規模宅地等の特例」において、被相続人の居住用宅地（特定居住用宅地等）に適用できる減額割合と限度面積の組み合わせとして正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '特定居住用宅地等は減額割合80%・限度面積330㎡です。')">① 50%・200㎡</div>
+        <div class="quiz-opt" onclick="answer(this, false, '特定居住用宅地等は減額割合80%・限度面積330㎡です。')">② 50%・330㎡</div>
+        <div class="quiz-opt" onclick="answer(this, false, '特定居住用宅地等は減額割合80%・限度面積330㎡です。')">③ 80%・200㎡</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解です！特定居住用宅地等は減額割合80%・限度面積330㎡です。事業用（特定事業用）は80%・400㎡、貸付事業用は50%・200㎡と区別して覚えましょう。')">④ 80%・330㎡</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-num">問題 03 ／ 金融資産運用</div>
+      <div class="quiz-q">ポートフォリオの期待収益率の計算として正しいものはどれか。株式A（期待収益率8%・投資割合60%）と株式B（期待収益率4%・投資割合40%）で構成される場合。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '加重平均で計算します。8%×60%＋4%×40%＝6.4%が正解です。')">① 6.0%</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解です！ポートフォリオの期待収益率＝各資産の期待収益率×投資割合の合計。8%×0.6＋4%×0.4＝4.8%＋1.6%＝6.4%')">② 6.4%</div>
+        <div class="quiz-opt" onclick="answer(this, false, '加重平均で計算します。8%×60%＋4%×40%＝6.4%が正解です。')">③ 6.8%</div>
+        <div class="quiz-opt" onclick="answer(this, false, '加重平均で計算します。8%×60%＋4%×40%＝6.4%が正解です。')">④ 7.0%</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 直前チェック -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">直前チェックリスト（2級版）</div>
+    </div>
+
+    <div class="checklist">
+      <div class="progress-text" id="progressText">0 / 25 完了</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">給与所得控除の速算表を確認した（収入別の控除額）</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">所得税の税率速算表（5%〜45%の7段階）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">退職所得控除の計算（20年以下・20年超）を言える</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">損益通算できる所得・できない所得を整理した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">長期・短期譲渡所得の区分（5年超かどうか）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">居住用財産の3,000万円特別控除の要件を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">相続税の速算表（税率・控除額）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">配偶者の税額軽減（1億6,000万円または法定相続分）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">小規模宅地等の特例（3種類の減額割合・面積）を整理した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">生前贈与加算の期間（相続前7年以内）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">相続時精算課税制度の概要（2,500万円・60歳以上等）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ポートフォリオの期待収益率の計算（加重平均）を練習した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">債券の利回り計算（直接・最終・所有期間）を言える</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">NISAの年間上限・生涯上限（1,800万円）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">iDeCoの拠出限度額（職業別）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">不動産の収益計算（表面利回り・実質利回り）を練習した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">借地借家法（普通借家・定期借家の違い）を整理した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">老齢厚生年金の繰上げ・繰下げ受給の増減率を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">高額療養費制度の自己負担限度額の概要を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">法人税と所得税の違い（課税対象・申告方法）を整理した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">事業所得と給与所得の違い（必要経費の扱い）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">青色申告特別控除（65万円・10万円の条件）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">FPとしての提案の際、断定的な投資推奨はしないことを意識している</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">試験当日の計算機・受験票・身分証を準備した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">試験会場・開始時間・経路を確認した</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>FP2級合格後は「資産形成ナビ」で実践へ</h3>
+    <p>2級で学んだ財務指標・税務知識を実際の投資に活かせるツールを開発中です。<br>LINE登録者に先行無料でご案内します。</p>
+    <a href="https://lin.ee/your_link" class="cta-btn">📲 LINEで先行登録する（@819thtrv）</a>
+  </div>
+
+</div>
+
+<script>
+function toggleCalc(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.calc-toggle');
+  body.classList.toggle('open');
+  toggle.textContent = body.classList.contains('open') ? '－' : '＋';
+}
+
+function answer(opt, isCorrect, explain) {
+  const box = opt.closest('.quiz-box');
+  if (box.querySelector('.correct') || box.querySelector('.wrong')) return;
+  const options = box.querySelectorAll('.quiz-opt');
+  options.forEach(o => o.style.pointerEvents = 'none');
+  opt.classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) {
+    options.forEach(o => {
+      if (o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+  const explainEl = box.querySelector('.quiz-explain');
+  explainEl.textContent = explain;
+  explainEl.classList.add('show');
+}
+
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = document.querySelectorAll('.check-item');
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  const total = items.length;
+  const pct = (checked / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${checked} / ${total} 完了`;
+}
+</script>
+</body>
+</html>
