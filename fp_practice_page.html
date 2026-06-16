@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>実践編｜FPで学んだ知識を株式投資に活かす</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --navy: #1a2744;
+    --gold: #c8a96e;
+    --cream: #f8f5ef;
+    --green: #2a7a4f;
+    --green-light: #e8f5ee;
+    --text: #1a2744;
+    --text-muted: #6b7a99;
+    --border: #e2ddd5;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* HEADER */
+  .chapter-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28px;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .lead {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* BRIDGE SECTION */
+  .bridge {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 40px;
+    color: var(--white);
+  }
+
+  .bridge h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .bridge p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.9;
+  }
+
+  /* INDICATOR MAPPING */
+  .mapping-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mapping-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .mapping-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .mapping-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .map-left { }
+  .map-indicator {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .map-exam {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .map-arrow {
+    font-size: 18px;
+    color: var(--gold);
+    text-align: center;
+  }
+
+  .map-right { }
+  .map-practice {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 500;
+  }
+  .map-how {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* TOOL INTRO */
+  .tool-box {
+    background: var(--white);
+    border: 2px solid var(--navy);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .tool-box .tool-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .tool-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .tool-box .tool-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+    text-align: left;
+  }
+
+  .feature-item {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 14px;
+  }
+
+  .feature-icon { font-size: 20px; margin-bottom: 6px; }
+  .feature-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .feature-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, var(--navy) 0%, #243460 100%);
+    border-radius: 10px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .cta-box .cta-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .cta-box p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 24px;
+  }
+
+  .line-btn {
+    display: inline-block;
+    background: #06C755;
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+
+  .line-btn:hover { opacity: 0.85; }
+
+  .line-id {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+  }
+
+  /* PLAN TABLE */
+  .plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .plan-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .plan-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .plan-table tr:last-child td { border-bottom: none; }
+
+  .plan-table .highlight {
+    background: #f0f4ff;
+    font-weight: 700;
+  }
+
+  .badge-free {
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .badge-paid {
+    background: #fff3e0;
+    color: #e65100;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    padding: 16px;
+    background: var(--white);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .mapping-item { grid-template-columns: 1fr; gap: 8px; }
+    .map-arrow { text-align: left; }
+    .feature-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="chapter-label">実践編 ／ PRACTICE</div>
+  <h1>FPで学んだ指標を<br>実際の株式投資に活かす</h1>
+  <p class="lead">試験勉強で覚えたROE・PBR・自己資本比率。これらはそのまま「良い株を見分ける目」になります。このページでは、試験の知識と実践の橋渡しをします。</p>
+
+  <div class="bridge">
+    <h2>試験で学ぶ指標は「本物」です</h2>
+    <p>FP試験の株式分野で登場する指標は、実際にプロの投資家・アナリストが日々使っているものと同じです。試験が終わったら忘れるのはもったいない。学んだ知識を使って、長期的に資産を育てる視点を持ちましょう。</p>
+  </div>
+
+  <div class="mapping-title">FP試験の知識 → 実践での使い方</div>
+  <div class="mapping-list">
+    <div class="mapping-item">
+      <div class="map-left">
+        <div class="map-indicator">自己資本比率</div>
+        <div class="map-exam">試験：財務諸表・安全性分析</div>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-right">
+        <div class="map-practice">財務の安全度チェック</div>
+        <div class="map-how">50%以上が長期保有の目安</div>
+      </div>
+    </div>
+    <div class="mapping-item">
+      <div class="map-left">
+        <div class="map-indicator">ROE</div>
+        <div class="map-exam">試験：収益性分析・株式指標</div>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-right">
+        <div class="map-practice">稼ぐ力のスクリーニング</div>
+        <div class="map-how">8%以上が合格ライン</div>
+      </div>
+    </div>
+    <div class="mapping-item">
+      <div class="map-left">
+        <div class="map-indicator">PBR</div>
+        <div class="map-exam">試験：株式の評価・割安度</div>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-right">
+        <div class="map-practice">割安銘柄の発掘</div>
+        <div class="map-how">1.5倍以下が目安</div>
+      </div>
+    </div>
+    <div class="mapping-item">
+      <div class="map-left">
+        <div class="map-indicator">キャッシュフロー</div>
+        <div class="map-exam">試験：CF計算書・資金繰り</div>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-right">
+        <div class="map-practice">配当持続性の確認</div>
+        <div class="map-how">フリーCF3年連続プラスが理想</div>
+      </div>
+    </div>
+    <div class="mapping-item">
+      <div class="map-left">
+        <div class="map-indicator">配当利回り</div>
+        <div class="map-exam">試験：株式の利回り計算</div>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-right">
+        <div class="map-practice">インカムゲイン戦略</div>
+        <div class="map-how">3%以上＋連続増配が理想</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-box">
+    <div class="tool-label">開発中のツール</div>
+    <h3>堅実株ナビ</h3>
+    <p class="tool-sub">FPの視点で日本株をスクリーニングするシステム</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🏦</div>
+        <div class="feature-name">堅実配当型</div>
+        <div class="feature-desc">連続増配・財務安定の銘柄を自動で抽出</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🏛️</div>
+        <div class="feature-name">財務優良型</div>
+        <div class="feature-desc">借金が少なく稼ぐ力の強い企業を選別</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🌱</div>
+        <div class="feature-name">成長×安定型</div>
+        <div class="feature-desc">売上成長と財務健全性を両立した企業</div>
+      </div>
+    </div>
+
+    <table class="plan-table">
+      <tr>
+        <th>プラン</th>
+        <th>月額</th>
+        <th>主な機能</th>
+      </tr>
+      <tr>
+        <td>無料 <span class="badge-free">FREE</span></td>
+        <td>¥0</td>
+        <td>プリセット1種・結果5件まで</td>
+      </tr>
+      <tr class="highlight">
+        <td>スタンダード <span class="badge-paid">人気</span></td>
+        <td>¥980</td>
+        <td>全プリセット・結果無制限・LINE通知</td>
+      </tr>
+      <tr>
+        <td>プロ</td>
+        <td>¥1,980</td>
+        <td>カスタム条件・バックテスト機能</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-eyebrow">LINE先行登録</div>
+    <h3>FP学習者・合格者限定で<br>先行無料案内を予定しています</h3>
+    <p>正式リリース時には有料プランを予定していますが、LINE登録者には特別価格でご案内します。まずは無料登録だけでも。</p>
+    <a href="https://lin.ee/your_link" class="line-btn">📲 LINEで先行登録する</a>
+    <div class="line-id">LINE ID：@819thtrv</div>
+  </div>
+
+  <div class="disclaimer">
+    【免責事項】本コンテンツは情報提供・教育目的であり、特定の銘柄への投資を推奨するものではありません。投資判断および売買はご自身の責任において行ってください。金融商品への投資にはリスクが伴い、元本が保証されるものではありません。
+  </div>
+
+</div>
+</body>
+</html>
