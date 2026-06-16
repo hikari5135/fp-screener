@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>堅実株ナビ｜FP流スクリーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243460;
+    --gold: #c8a96e;
+    --gold-light: #e8d5a3;
+    --cream: #f8f5ef;
+    --white: #ffffff;
+    --text: #1a2744;
+    --text-muted: #6b7a99;
+    --green: #2a7a4f;
+    --green-light: #e8f5ee;
+    --red: #c0392b;
+    --red-light: #fdf0ee;
+    --border: #e2ddd5;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .logo span {
+    color: var(--white);
+    font-size: 11px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    display: block;
+    letter-spacing: 0.15em;
+  }
+
+  .header-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    padding: 64px 32px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.15);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.10);
+  }
+
+  .hero-eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: 36px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+  }
+
+  /* STRATEGY SELECTOR */
+  .strategy-section {
+    padding: 48px 32px 32px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .strategy-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .strategy-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .strategy-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow);
+  }
+
+  .strategy-card.active {
+    border-color: var(--navy);
+    background: var(--navy);
+  }
+
+  .strategy-card.active .s-name { color: var(--gold); }
+  .strategy-card.active .s-desc { color: rgba(255,255,255,0.7); }
+  .strategy-card.active .s-tag { background: rgba(200,169,110,0.2); color: var(--gold-light); }
+
+  .s-icon { font-size: 24px; margin-bottom: 10px; }
+  .s-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .s-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .s-tag {
+    display: inline-block;
+    background: var(--cream);
+    color: var(--text-muted);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* SCREENING CONDITIONS */
+  .conditions-box {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+  }
+
+  .conditions-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .conditions-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .condition-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--cream);
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  .condition-name { color: var(--text-muted); }
+  .condition-val {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13px;
+  }
+
+  /* RUN BUTTON */
+  .run-btn {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: background 0.2s;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .run-btn:hover { background: var(--navy-light); }
+
+  .run-btn .btn-icon { font-size: 18px; }
+
+  /* RESULTS */
+  .results-section { max-width: 900px; margin: 0 auto; padding: 0 32px 64px; }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .results-count {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .results-count strong {
+    font-size: 22px;
+    color: var(--navy);
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .sort-select {
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  /* STOCK CARD */
+  .stock-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .stock-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .stock-card:hover { box-shadow: var(--shadow); }
+
+  .stock-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .stock-name-block {}
+  .stock-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .stock-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .score-block { text-align: right; }
+  .score-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; }
+  .score-val {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .score-val span { font-size: 13px; color: var(--text-muted); }
+
+  .fp-indicators {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .fp-item {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+
+  .fp-item-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .fp-item-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .fp-item-comment {
+    font-size: 10px;
+    color: var(--green);
+    margin-top: 2px;
+  }
+
+  .fp-item-comment.warn { color: var(--red); }
+
+  .stars {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: -1px;
+  }
+
+  .fp-plain {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--green-light);
+    padding: 8px 12px;
+    border-radius: 4px;
+    line-height: 1.6;
+    border-left: 3px solid var(--green);
+  }
+
+  .stock-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .watchlist-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .watchlist-btn:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  .watchlist-btn.added {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .disclaimer-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* LOCK OVERLAY */
+  .lock-card {
+    background: var(--white);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .lock-card .lock-icon { font-size: 28px; margin-bottom: 8px; }
+  .lock-card p { font-size: 13px; margin-bottom: 16px; }
+
+  .upgrade-btn {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    max-width: 900px;
+    margin: 0 auto 32px;
+    padding: 0 32px;
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+
+  /* LOADING */
+  .loading-overlay {
+    display: none;
+    text-align: center;
+    padding: 48px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) {
+    .strategy-cards { grid-template-columns: 1fr; }
+    .fp-indicators { grid-template-columns: repeat(2, 1fr); }
+    .conditions-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    堅実株ナビ
+    <span>FP流スクリーナー｜DEMO</span>
+  </div>
+  <div class="header-badge">無料体験中</div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">FP監修 ／ 日本株スクリーニング</div>
+  <h1>「長く持てる株」を、<br><em>FPの目線</em>で探す</h1>
+  <p class="hero-sub">財務の健全性・配当の安定性・割安度を、わかりやすい言葉で確認できます</p>
+</div>
+
+<div class="strategy-section">
+  <div class="section-label">STEP 1 ／ 戦略を選ぶ</div>
+  <div class="strategy-cards">
+    <div class="strategy-card active" onclick="selectStrategy('dividend')">
+      <div class="s-icon">🏦</div>
+      <div class="s-name">堅実配当型</div>
+      <div class="s-desc">連続増配・財務安定の銘柄を重視。長期保有で配当を積み上げたい方向け。</div>
+      <div class="s-tag">初心者におすすめ</div>
+    </div>
+    <div class="strategy-card" onclick="selectStrategy('solid')">
+      <div class="s-icon">🏛️</div>
+      <div class="s-name">財務優良型</div>
+      <div class="s-desc">借金が少なく・稼ぐ力が強い企業に絞る。不況に強い銘柄を探したい方向け。</div>
+      <div class="s-tag">スタンダードプラン</div>
+    </div>
+    <div class="strategy-card" onclick="selectStrategy('growth')">
+      <div class="s-icon">🌱</div>
+      <div class="s-name">成長×安定型</div>
+      <div class="s-desc">売上が伸びながら財務も健全な企業を探す。中長期の成長を狙いたい方向け。</div>
+      <div class="s-tag">スタンダードプラン</div>
+    </div>
+  </div>
+
+  <div class="conditions-box">
+    <div class="conditions-title">スクリーニング条件（堅実配当型）</div>
+    <div class="conditions-grid">
+      <div class="condition-item">
+        <span class="condition-name">配当利回り</span>
+        <span class="condition-val">3.0% 以上</span>
+      </div>
+      <div class="condition-item">
+        <span class="condition-name">連続増配・安定配当</span>
+        <span class="condition-val">5年以上</span>
+      </div>
+      <div class="condition-item">
+        <span class="condition-name">自己資本比率</span>
+        <span class="condition-val">50% 以上</span>
+      </div>
+      <div class="condition-item">
+        <span class="condition-name">フリーキャッシュフロー</span>
+        <span class="condition-val">3年連続プラス</span>
+      </div>
+      <div class="condition-item">
+        <span class="condition-name">PBR（株価純資産倍率）</span>
+        <span class="condition-val">1.5倍 以下</span>
+      </div>
+      <div class="condition-item">
+        <span class="condition-name">ROE（自己資本利益率）</span>
+        <span class="condition-val">8% 以上</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="run-btn" onclick="runScreening()">
+    <span class="btn-icon">🔍</span>
+    この条件でスクリーニングを実行する
+  </button>
+</div>
+
+<div class="results-section">
+  <div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+    データを取得・分析中…
+  </div>
+
+  <div id="results" style="display:none">
+    <div class="results-header">
+      <div class="results-count">
+        <strong id="count">0</strong> 件 該当
+        <div style="font-size:11px;margin-top:2px;">※デモデータ表示中</div>
+      </div>
+      <select class="sort-select">
+        <option>配当利回り順</option>
+        <option>FPスコア順</option>
+        <option>自己資本比率順</option>
+      </select>
+    </div>
+
+    <div class="stock-list" id="stockList"></div>
+
+    <div class="lock-card" style="margin-top:12px">
+      <div class="lock-icon">🔒</div>
+      <p>残り <strong>12件</strong> はスタンダードプランで表示されます<br>（月額 ¥980 で全銘柄・LINE通知が使えます）</p>
+      <button class="upgrade-btn">14日間 無料で試す</button>
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer" id="disc" style="display:none">
+  【免責事項】本サービスは投資情報の提供を目的としており、特定の銘柄への投資を推奨するものではありません。掲載されているデータは参考情報であり、その正確性・完全性を保証するものではありません。投資判断および売買はご自身の責任において行ってください。金融商品への投資にはリスクが伴います。
+</div>
+
+<script>
+const strategies = {
+  dividend: {
+    name: '堅実配当型',
+    conditions: [
+      {name:'配当利回り', val:'3.0% 以上'},
+      {name:'連続増配・安定配当', val:'5年以上'},
+      {name:'自己資本比率', val:'50% 以上'},
+      {name:'フリーキャッシュフロー', val:'3年連続プラス'},
+      {name:'PBR', val:'1.5倍 以下'},
+      {name:'ROE', val:'8% 以上'},
+    ]
+  },
+  solid: {
+    name: '財務優良型',
+    conditions: [
+      {name:'自己資本比率', val:'60% 以上'},
+      {name:'有利子負債比率', val:'30% 以下'},
+      {name:'ROE', val:'8% 以上'},
+      {name:'営業利益率', val:'10% 以上'},
+      {name:'連続黒字', val:'5年以上'},
+      {name:'PBR', val:'2.0倍 以下'},
+    ]
+  },
+  growth: {
+    name: '成長×安定型',
+    conditions: [
+      {name:'売上成長率（3年）', val:'5% 以上'},
+      {name:'ROE', val:'10% 以上'},
+      {name:'PBR', val:'1.5倍 以下'},
+      {name:'自己資本比率', val:'40% 以上'},
+      {name:'営業利益成長率', val:'3年連続プラス'},
+      {name:'フリーCF', val:'プラス継続'},
+    ]
+  }
+};
+
+const demoStocks = [
+  {
+    name: '花王',
+    code: '4452',
+    industry: '化学｜東証プライム',
+    score: 91,
+    dividend: '3.4%',
+    equity: '62%',
+    pbr: '1.21',
+    roe: '12.3%',
+    cf: '◎',
+    continuity: '33年連続増配',
+    plain: '日用品トップメーカー。30年以上増配を続ける希少な企業で、生活に必需品を作るため不況でも収益が安定しています。財務の安全度も高く、長期保有に向いています。',
+    stars: 5,
+    cfWarn: false
+  },
+  {
+    name: '信越化学工業',
+    code: '4063',
+    industry: '化学｜東証プライム',
+    score: 88,
+    dividend: '3.1%',
+    equity: '74%',
+    pbr: '1.38',
+    roe: '18.5%',
+    cf: '◎',
+    continuity: '10年以上安定配当',
+    plain: '半導体材料（シリコンウエハ）の世界トップ企業。借金がほぼなく、稼ぐ力が非常に強い。配当は控えめですが財務の安全度は群を抜いています。',
+    stars: 5,
+    cfWarn: false
+  },
+  {
+    name: 'NTT',
+    code: '9432',
+    industry: '情報・通信｜東証プライム',
+    score: 82,
+    dividend: '3.3%',
+    equity: '51%',
+    pbr: '1.15',
+    roe: '10.2%',
+    cf: '○',
+    continuity: '15年以上連続増配',
+    plain: '国内最大の通信インフラ企業。毎年着実に配当を増やしており、株価が大きく下がりにくい安定感があります。初心者の長期保有の第一歩として検討しやすい銘柄です。',
+    stars: 4,
+    cfWarn: false
+  },
+  {
+    name: '三菱HCキャピタル',
+    code: '8593',
+    industry: 'その他金融｜東証プライム',
+    score: 79,
+    dividend: '4.1%',
+    equity: '56%',
+    pbr: '0.92',
+    roe: '9.8%',
+    cf: '○',
+    continuity: '25年以上連続増配',
+    plain: '配当利回りが4%超と高く、四半世紀以上増配を続けています。PBRが1倍を切っており「資産価値より安く買える」状態。高配当を重視する方に向いています。',
+    stars: 4,
+    cfWarn: false
+  },
+  {
+    name: 'KDDI',
+    code: '9433',
+    industry: '情報・通信｜東証プライム',
+    score: 85,
+    dividend: '3.5%',
+    equity: '53%',
+    pbr: '1.42',
+    roe: '14.1%',
+    cf: '◎',
+    continuity: '22年連続増配',
+    plain: '通信大手で22年連続増配中。株主優待（カタログギフト）も充実しており、配当＋優待の総合利回りが魅力。安定した収益基盤を持つ長期保有向けの銘柄です。',
+    stars: 5,
+    cfWarn: false
+  },
+];
+
+let currentStrategy = 'dividend';
+
+function selectStrategy(key) {
+  currentStrategy = key;
+  document.querySelectorAll('.strategy-card').forEach((c,i) => {
+    c.classList.toggle('active', ['dividend','solid','growth'][i] === key);
+  });
+
+  const s = strategies[key];
+  const grid = document.querySelector('.conditions-grid');
+  grid.innerHTML = s.conditions.map(c => `
+    <div class="condition-item">
+      <span class="condition-name">${c.name}</span>
+      <span class="condition-val">${c.val}</span>
+    </div>
+  `).join('');
+
+  document.querySelector('.conditions-title').textContent = `スクリーニング条件（${s.name}）`;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('disc').style.display = 'none';
+}
+
+function runScreening() {
+  const loading = document.getElementById('loading');
+  const results = document.getElementById('results');
+  loading.style.display = 'block';
+  results.style.display = 'none';
+
+  setTimeout(() => {
+    loading.style.display = 'none';
+    results.style.display = 'block';
+    document.getElementById('disc').style.display = 'block';
+    document.getElementById('count').textContent = 17;
+
+    const list = document.getElementById('stockList');
+    list.innerHTML = demoStocks.map((s, i) => `
+      <div class="stock-card">
+        <div class="stock-card-top">
+          <div class="stock-name-block">
+            <div class="stock-name">${s.name} <span style="font-size:13px;color:var(--text-muted);font-family:'Noto Sans JP';">${s.code}</span></div>
+            <div class="stock-meta">${s.industry} ／ ${s.continuity}</div>
+          </div>
+          <div class="score-block">
+            <div class="score-label">FPスコア</div>
+            <div class="score-val">${s.score}<span>/100</span></div>
+          </div>
+        </div>
+
+        <div class="fp-indicators">
+          <div class="fp-item">
+            <div class="fp-item-label">配当利回り</div>
+            <div class="fp-item-val">${s.dividend}</div>
+            <div class="fp-item-comment">${'★'.repeat(s.stars)}${'☆'.repeat(5-s.stars)}</div>
+          </div>
+          <div class="fp-item">
+            <div class="fp-item-label">財務の安全度</div>
+            <div class="fp-item-val">${s.equity}</div>
+            <div class="fp-item-comment">自己資本比率</div>
+          </div>
+          <div class="fp-item">
+            <div class="fp-item-label">割安度（PBR）</div>
+            <div class="fp-item-val">${s.pbr}倍</div>
+            <div class="fp-item-comment">${parseFloat(s.pbr) < 1 ? '資産より割安' : parseFloat(s.pbr) < 1.5 ? '適正水準' : '↑やや割高'}</div>
+          </div>
+          <div class="fp-item">
+            <div class="fp-item-label">稼ぐ力（ROE）</div>
+            <div class="fp-item-val">${s.roe}</div>
+            <div class="fp-item-comment">CF ${s.cf}</div>
+          </div>
+        </div>
+
+        <div class="fp-plain">💡 ${s.plain}</div>
+
+        <div class="stock-card-footer">
+          <span class="disclaimer-tag">※投資推奨ではありません。判断・売買はご自身で。</span>
+          <button class="watchlist-btn" onclick="toggleWatch(this)">＋ 気になる</button>
+        </div>
+      </div>
+    `).join('');
+
+    results.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 1800);
+}
+
+function toggleWatch(btn) {
+  btn.classList.toggle('added');
+  btn.textContent = btn.classList.contains('added') ? '✓ 追加済み' : '＋ 気になる';
+}
+</script>
+</body>
+</html>
