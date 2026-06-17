@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宅建業法 完全攻略｜資産形成ナビ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243460;
+    --gold: #c8a96e;
+    --gold-light: #f5e9d0;
+    --cream: #f8f5ef;
+    --white: #ffffff;
+    --text: #1a2744;
+    --text-muted: #6b7a99;
+    --green: #2a7a4f;
+    --green-light: #e8f5ee;
+    --red: #c0392b;
+    --red-light: #fdf0ee;
+    --orange: #c05621;
+    --orange-light: #fff7ed;
+    --border: #e2ddd5;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  .logo span {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    font-family: 'Noto Sans JP', sans-serif;
+    display: block;
+  }
+
+  .header-tag {
+    background: var(--orange);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #2d1a00 0%, #4a2f0a 100%);
+    padding: 56px 32px 48px;
+    text-align: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 4px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: 32px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub { color: rgba(255,255,255,0.65); font-size: 13px; margin-bottom: 32px; }
+
+  .hero-stats { display: flex; justify-content: center; gap: 40px; }
+  .hero-stat { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--gold); font-family: 'Noto Serif JP', serif; line-height: 1; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  /* PROGRESS DASHBOARD */
+  .dashboard {
+    background: var(--navy);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .dash-item { text-align: center; }
+  .dash-num { font-size: 24px; font-weight: 700; color: var(--gold); font-family: 'Noto Serif JP', serif; }
+  .dash-label { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  .dash-progress { flex: 1; min-width: 200px; }
+  .dash-progress-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+  .progress-bar { background: rgba(255,255,255,0.15); border-radius: 4px; height: 10px; overflow: hidden; }
+  .progress-fill { background: var(--gold); height: 100%; border-radius: 4px; transition: width 0.4s; width: 0%; }
+
+  /* CONTAINER */
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* THEME TABS */
+  .theme-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+
+  .theme-tab {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    background: var(--white);
+    color: var(--text-muted);
+    transition: all 0.15s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .theme-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .theme-tab:hover { border-color: var(--navy); }
+
+  /* SECTION */
+  .section { margin-bottom: 48px; display: none; }
+  .section.active { display: block; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--orange);
+  }
+
+  .section-icon { font-size: 24px; }
+
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: 20px; color: var(--navy); }
+
+  .section-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--cream);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* POINT BOX */
+  .key-point {
+    background: var(--orange-light);
+    border-left: 4px solid var(--orange);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .key-point strong { color: var(--orange); }
+
+  /* QUIZ */
+  .quiz-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s;
+  }
+
+  .quiz-box:hover { box-shadow: var(--shadow); }
+
+  .quiz-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .quiz-num { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  .diff-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .diff-basic { background: var(--green-light); color: var(--green); }
+  .diff-standard { background: var(--orange-light); color: var(--orange); }
+  .diff-hard { background: var(--red-light); color: var(--red); }
+
+  .freq-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+    background: var(--gold-light);
+    color: var(--orange);
+    margin-left: auto;
+  }
+
+  .quiz-q {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+  .quiz-opt {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+    background: var(--cream);
+    line-height: 1.6;
+  }
+
+  .quiz-opt:hover { border-color: var(--orange); background: var(--white); }
+  .quiz-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+  .quiz-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .quiz-opt.disabled { pointer-events: none; }
+
+  .quiz-explain {
+    display: none;
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.9;
+    border-left: 3px solid var(--orange);
+  }
+
+  .quiz-explain.show { display: block; }
+
+  .quiz-fp-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--orange);
+    background: var(--orange-light);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .check-item.checked .check-box { background: var(--green); border-color: var(--green); color: var(--white); font-size: 12px; }
+  .check-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .check-item.checked .check-text { color: var(--text-muted); text-decoration: line-through; }
+
+  .cl-progress-bar { background: var(--border); border-radius: 4px; height: 8px; margin-bottom: 20px; overflow: hidden; }
+  .cl-progress-fill { background: var(--orange); height: 100%; border-radius: 4px; transition: width 0.3s; width: 0%; }
+  .cl-progress-text { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, #2d1a00 0%, #4a2f0a 100%);
+    border-radius: 10px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .cta-box h3 { font-family: 'Noto Serif JP', serif; color: var(--gold); font-size: 20px; margin-bottom: 8px; }
+  .cta-box p { color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 24px; }
+
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .cta-btn-gold { background: var(--gold); color: var(--navy); padding: 12px 28px; border-radius: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+  .cta-btn-line { background: #06C755; color: var(--white); padding: 12px 28px; border-radius: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 24px; }
+    .hero-stats { gap: 20px; }
+    .dashboard { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">資産形成ナビ<span>FP学習＆実践プラットフォーム</span></div>
+  <div class="header-tag">宅建 業法対策</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">宅地建物取引士｜宅建業法</div>
+  <h1>宅建業法を<em>完全制覇</em>して<br>合格点を確保する</h1>
+  <p class="hero-sub">出題数20問・最頻出分野。ここを固めれば合格が見えてくる。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="stat-num">20</div><div class="stat-label">出題数（50問中）</div></div>
+    <div class="hero-stat"><div class="stat-num">30</div><div class="stat-label">練習問題</div></div>
+    <div class="hero-stat"><div class="stat-num">25</div><div class="stat-label">直前チェック項目</div></div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="dash-item"><div class="dash-num" id="correctCount">0</div><div class="dash-label">正解数</div></div>
+  <div class="dash-item"><div class="dash-num" id="totalCount">0</div><div class="dash-label">回答済み</div></div>
+  <div class="dash-item"><div class="dash-num" id="accuracyRate">－</div><div class="dash-label">正答率</div></div>
+  <div class="dash-progress">
+    <div class="dash-progress-label">学習進捗</div>
+    <div class="progress-bar"><div class="progress-fill" id="mainProgress"></div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- THEME TABS -->
+  <div class="theme-tabs">
+    <button class="theme-tab active" onclick="switchTab('tab1', this)">① 免許制度</button>
+    <button class="theme-tab" onclick="switchTab('tab2', this)">② 宅建士</button>
+    <button class="theme-tab" onclick="switchTab('tab3', this)">③ 重要事項説明</button>
+    <button class="theme-tab" onclick="switchTab('tab4', this)">④ 契約・媒介</button>
+    <button class="theme-tab" onclick="switchTab('tab5', this)">⑤ 直前チェック</button>
+  </div>
+
+  <!-- TAB1: 免許制度 -->
+  <div class="section active" id="tab1">
+    <div class="section-header">
+      <div class="section-icon">🏛️</div>
+      <div class="section-title">免許制度</div>
+      <div class="section-count">8問</div>
+    </div>
+
+    <div class="key-point">
+      <strong>🔑 最重要ポイント：</strong>宅建業を営むには免許が必要。国土交通大臣免許（2以上の都道府県に事務所）と都道府県知事免許（1つの都道府県のみ）の区別が頻出。免許の有効期間は<strong>5年</strong>で更新可能。
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 01</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">最頻出</span>
+      </div>
+      <div class="quiz-q">宅地建物取引業を営もうとする者が、A県とB県に事務所を設置する場合、どの免許を受けなければならないか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, 'A県とB県の2つの都道府県に事務所を設置する場合は、国土交通大臣の免許が必要です。1つの都道府県内のみの場合が知事免許です。')">① A県知事の免許</div>
+        <div class="quiz-opt" onclick="answer(this, false, 'A県とB県の2つの都道府県に事務所を設置する場合は、国土交通大臣の免許が必要です。')">② B県知事の免許</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！2以上の都道府県に事務所を設置する場合は国土交通大臣免許が必要です。1都道府県内のみなら知事免許。これは必ず覚えましょう。')">③ 国土交通大臣の免許</div>
+        <div class="quiz-opt" onclick="answer(this, false, '免許は1つで足ります。国土交通大臣免許が正解です。')">④ A県とB県両方の知事免許</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 02</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">頻出</span>
+      </div>
+      <div class="quiz-q">宅建業の免許の有効期間として正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '宅建業の免許の有効期間は5年です。')">① 3年</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！宅建業免許の有効期間は5年です。更新は有効期間満了の90日前から30日前までに申請が必要です。')">② 5年</div>
+        <div class="quiz-opt" onclick="answer(this, false, '宅建業の免許の有効期間は5年です。')">③ 7年</div>
+        <div class="quiz-opt" onclick="answer(this, false, '宅建業の免許の有効期間は5年です。')">④ 10年</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 03</span>
+        <span class="diff-badge diff-standard">標準</span>
+      </div>
+      <div class="quiz-q">次のうち、宅地建物取引業の免許が不要なケースはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '自己所有の宅地を反復継続して売却する場合は免許が必要です。')">① 自己所有の宅地を反復継続して売却する</div>
+        <div class="quiz-opt" onclick="answer(this, false, '他人の宅地の売買を媒介する場合は免許が必要です。')">② 他人の宅地の売買を媒介する</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！自己居住用の住宅を1回だけ売却する場合は「業」として行うわけではないため、免許は不要です。反復継続性がなければ宅建業に該当しません。')">③ 自己居住用の住宅を1回だけ売却する</div>
+        <div class="quiz-opt" onclick="answer(this, false, '他人の宅地の賃借を媒介する場合は免許が必要です。')">④ 他人の宅地の賃借を媒介する</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 04</span>
+        <span class="diff-badge diff-standard">標準</span>
+        <span class="freq-badge">頻出</span>
+      </div>
+      <div class="quiz-q">宅建業者が事務所を新たに設置する場合、営業保証金として本店に供託する金額はいくらか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '本店は1,000万円、支店は500万円です。')">① 500万円</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！営業保証金は本店1,000万円・支店1か所につき500万円です。宅建業保証協会に加入している場合は弁済業務保証金分担金（主たる事務所60万円・従たる事務所30万円）で代替できます。')">② 1,000万円</div>
+        <div class="quiz-opt" onclick="answer(this, false, '本店は1,000万円、支店は500万円です。')">③ 1,500万円</div>
+        <div class="quiz-opt" onclick="answer(this, false, '本店は1,000万円、支店は500万円です。')">④ 2,000万円</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+  </div>
+
+  <!-- TAB2: 宅建士 -->
+  <div class="section" id="tab2">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">宅地建物取引士（宅建士）</div>
+      <div class="section-count">8問</div>
+    </div>
+
+    <div class="key-point">
+      <strong>🔑 最重要ポイント：</strong>事務所には従業員5人に1人以上の専任の宅建士を設置義務あり。宅建士証の有効期間は<strong>5年</strong>。登録の移転・変更届は重要。
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 05</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">最頻出</span>
+      </div>
+      <div class="quiz-q">宅建業者の事務所における専任の宅建士の設置義務として正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '従業員5人につき1人以上が正解です。')">① 従業員3人につき1人以上</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！事務所には従業員5人につき1人以上の専任の宅建士を置く義務があります。この比率は必ず覚えましょう。')">② 従業員5人につき1人以上</div>
+        <div class="quiz-opt" onclick="answer(this, false, '従業員5人につき1人以上が正解です。')">③ 従業員10人につき1人以上</div>
+        <div class="quiz-opt" onclick="answer(this, false, '従業員5人につき1人以上が正解です。')">④ 従業員の人数に関係なく1人以上</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 06</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">頻出</span>
+      </div>
+      <div class="quiz-q">宅建士証の有効期間として正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '宅建士証の有効期間は5年です。')">① 3年</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！宅建士証の有効期間は5年です。更新には登録を受けた都道府県知事が指定する法定講習（有効期間満了前6か月以内）の受講が必要です。')">② 5年</div>
+        <div class="quiz-opt" onclick="answer(this, false, '宅建士証の有効期間は5年です。')">③ 7年</div>
+        <div class="quiz-opt" onclick="answer(this, false, '宅建士証の有効期間は5年です。')">④ 終身</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 07</span>
+        <span class="diff-badge diff-standard">標準</span>
+      </div>
+      <div class="quiz-q">宅建士が氏名を変更した場合、変更の登録申請はいつまでに行わなければならないか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '変更の登録申請は遅滞なく（速やかに）行う必要があります。')">① 変更後7日以内</div>
+        <div class="quiz-opt" onclick="answer(this, false, '変更の登録申請は遅滞なく（速やかに）行う必要があります。')">② 変更後14日以内</div>
+        <div class="quiz-opt" onclick="answer(this, false, '変更の登録申請は遅滞なく（速やかに）行う必要があります。')">③ 変更後30日以内</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！宅建士の氏名・住所等の変更は「遅滞なく」変更の登録を申請しなければなりません。期限の日数は定められておらず「遅滞なく」が正解です。')">④ 遅滞なく</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+  </div>
+
+  <!-- TAB3: 重要事項説明 -->
+  <div class="section" id="tab3">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div class="section-title">重要事項説明（35条書面）</div>
+      <div class="section-count">7問</div>
+    </div>
+
+    <div class="key-point">
+      <strong>🔑 最重要ポイント：</strong>重要事項説明は<strong>宅建士が</strong>、契約締結前に、買主・借主に対して行う。宅建士証を提示しながら説明。売主・貸主への説明義務はない。
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 08</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">最頻出</span>
+      </div>
+      <div class="quiz-q">重要事項説明について正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '重要事項説明は宅建士が行わなければなりません。宅建業者の従業員であれば誰でもよいわけではありません。')">① 宅建業者の従業員であれば誰でも行える</div>
+        <div class="quiz-opt" onclick="answer(this, false, '売主・貸主への説明義務はありません。買主・借主に対して行います。')">② 売主・貸主にも説明しなければならない</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！重要事項説明は専任の宅建士でなくても宅建士であれば行えます。ただし必ず宅建士が宅建士証を提示して行う必要があります。')">③ 宅建士であれば専任でなくても行える</div>
+        <div class="quiz-opt" onclick="answer(this, false, '重要事項説明は契約締結前に行わなければなりません。')">④ 契約締結後でも行える</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 09</span>
+        <span class="diff-badge diff-standard">標準</span>
+        <span class="freq-badge">頻出</span>
+      </div>
+      <div class="quiz-q">重要事項説明書（35条書面）に記載しなければならない事項として正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, true, '正解！飲用水・電気・ガスの整備状況は35条書面の記載事項です。その他、登記された権利の種類、法令上の制限、代金や借賃の額なども記載事項です。')">① 飲用水・電気・ガスの整備状況</div>
+        <div class="quiz-opt" onclick="answer(this, false, '報酬額は35条書面の記載事項ではありません。37条書面（契約書）の記載事項です。')">② 宅建業者が受け取る報酬額</div>
+        <div class="quiz-opt" onclick="answer(this, false, '引渡し時期は37条書面（契約書）の記載事項です。')">③ 物件の引渡し時期</div>
+        <div class="quiz-opt" onclick="answer(this, false, '契約解除の条件は37条書面の記載事項です。')">④ 契約解除に関する事項</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+  </div>
+
+  <!-- TAB4: 契約・媒介 -->
+  <div class="section" id="tab4">
+    <div class="section-header">
+      <div class="section-icon">📝</div>
+      <div class="section-title">契約・媒介契約</div>
+      <div class="section-count">7問</div>
+    </div>
+
+    <div class="key-point">
+      <strong>🔑 最重要ポイント：</strong>媒介契約の種類（一般・専任・専属専任）の違いと制限事項が最頻出。クーリングオフの適用条件も必ず覚える。
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 10</span>
+        <span class="diff-badge diff-basic">基本</span>
+        <span class="freq-badge">最頻出</span>
+      </div>
+      <div class="quiz-q">専属専任媒介契約の有効期間と報告義務として正しい組み合わせはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '専属専任媒介契約は3か月・1週間に1回以上の報告が正解です。')">① 有効期間3か月・2週間に1回以上報告</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！専属専任媒介契約は有効期間3か月・1週間に1回以上の業務報告が義務です。専任媒介契約は3か月・2週間に1回以上です。この違いを覚えましょう。')">② 有効期間3か月・1週間に1回以上報告</div>
+        <div class="quiz-opt" onclick="answer(this, false, '専属専任媒介契約は3か月・1週間に1回以上の報告が正解です。')">③ 有効期間6か月・1週間に1回以上報告</div>
+        <div class="quiz-opt" onclick="answer(this, false, '専属専任媒介契約は3か月・1週間に1回以上の報告が正解です。')">④ 有効期間6か月・2週間に1回以上報告</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 11</span>
+        <span class="diff-badge diff-standard">標準</span>
+        <span class="freq-badge">頻出</span>
+      </div>
+      <div class="quiz-q">宅建業者が自ら売主となる場合のクーリングオフについて正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, 'クーリングオフの期間は書面で告知を受けた日から8日間です。')">① 契約締結後10日間はクーリングオフできる</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！クーリングオフは書面による告知を受けた日から8日間以内に書面で申し込みの撤回・契約の解除ができます。買主が宅建業者の場合は適用されません。')">② 書面で告知を受けた日から8日間以内に書面で撤回できる</div>
+        <div class="quiz-opt" onclick="answer(this, false, 'クーリングオフは書面で行う必要があります。口頭での撤回は認められません。')">③ 口頭でも撤回できる</div>
+        <div class="quiz-opt" onclick="answer(this, false, 'クーリングオフは宅建業者の事務所で契約した場合は適用されません。')">④ 宅建業者の事務所で契約した場合も適用される</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta">
+        <span class="quiz-num">問題 12</span>
+        <span class="diff-badge diff-hard">応用</span>
+      </div>
+      <div class="quiz-q">宅建業者が自ら売主として、宅建業者でない買主と売買契約を締結する場合、手付金の額の制限として正しいものはどれか。</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this, false, '手付金の上限は代金の20%です。')">① 代金の10%以内</div>
+        <div class="quiz-opt" onclick="answer(this, true, '正解！宅建業者が自ら売主の場合、買主が宅建業者でないときは手付金は代金の20%を超えてはなりません。また手付金は解約手付とみなされます。')">② 代金の20%以内</div>
+        <div class="quiz-opt" onclick="answer(this, false, '手付金の上限は代金の20%です。')">③ 代金の30%以内</div>
+        <div class="quiz-opt" onclick="answer(this, false, '手付金の上限は代金の20%です。')">④ 制限なし</div>
+      </div>
+      <div class="quiz-explain"></div>
+    </div>
+  </div>
+
+  <!-- TAB5: 直前チェック -->
+  <div class="section" id="tab5">
+    <div class="section-header">
+      <div class="section-icon">✅</div>
+      <div class="section-title">直前チェックリスト（宅建業法）</div>
+      <div class="section-count">25項目</div>
+    </div>
+
+    <div class="checklist">
+      <div class="cl-progress-text" id="clProgressText">0 / 25 完了</div>
+      <div class="cl-progress-bar"><div class="cl-progress-fill" id="clProgressFill"></div></div>
+
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">国土交通大臣免許（2以上の都道府県）と知事免許（1都道府県）の区別を言える</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">宅建業免許の有効期間（5年）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">免許更新申請の期限（満了前90日〜30日前）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">営業保証金の金額（本店1,000万円・支店500万円）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">弁済業務保証金分担金（主60万円・従30万円）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">専任の宅建士の設置義務（従業員5人に1人以上）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">宅建士証の有効期間（5年）と更新手続きを覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">宅建士の登録変更は「遅滞なく」申請することを覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">重要事項説明は宅建士が契約前に買主・借主に行うことを覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">重要事項説明時は宅建士証の提示が必要なことを覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">35条書面（重要事項説明書）の主な記載事項を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">37条書面（契約書）の主な記載事項を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">35条と37条の違い（記載事項の違い）を整理した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">一般媒介・専任媒介・専属専任媒介の3種類の違いを言える</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">専任媒介契約（3か月・2週間に1回報告）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">専属専任媒介契約（3か月・1週間に1回報告）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">クーリングオフの期間（告知日から8日間・書面で）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">クーリングオフが適用されない場所（事務所等）を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">手付金の上限（代金の20%・宅建業者が自ら売主の場合）を覚えている</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">手付金の保全措置が必要な金額を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">報酬額の上限計算方法を練習した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">宅建業者の免許欠格事由を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">宅建士の登録欠格事由を確認した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">試験当日の計算機・受験票・身分証を準備した</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">試験会場・開始時間・経路を確認した</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>宅建合格後は「資産形成ナビ」で実践へ</h3>
+    <p>宅建で学んだ不動産知識をFPの資産形成スキルと組み合わせて、実際の投資判断に活かせるツールを開発中です。</p>
+    <div class="cta-btns">
+      <a href="https://note.com/fp3_pro" class="cta-btn-gold">📖 FP教材もチェック</a>
+      <a href="https://lin.ee/your_link" class="cta-btn-line">📲 LINE先行登録（@819thtrv）</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let correctCount = 0;
+let totalCount = 0;
+const totalQuestions = 12;
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.theme-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function answer(opt, isCorrect, explain) {
+  const box = opt.closest('.quiz-box');
+  if (box.querySelector('.correct') || box.querySelector('.wrong')) return;
+
+  const options = box.querySelectorAll('.quiz-opt');
+  options.forEach(o => { o.classList.add('disabled'); o.style.pointerEvents = 'none'; });
+
+  opt.classList.add(isCorrect ? 'correct' : 'wrong');
+
+  if (!isCorrect) {
+    options.forEach(o => {
+      if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+
+  const explainEl = box.querySelector('.quiz-explain');
+  explainEl.textContent = explain;
+  explainEl.classList.add('show');
+
+  totalCount++;
+  if (isCorrect) correctCount++;
+
+  document.getElementById('correctCount').textContent = correctCount;
+  document.getElementById('totalCount').textContent = totalCount;
+  document.getElementById('accuracyRate').textContent =
+    Math.round((correctCount / totalCount) * 100) + '%';
+  document.getElementById('mainProgress').style.width =
+    (totalCount / totalQuestions * 100) + '%';
+}
+
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
+  updateCheckProgress();
+}
+
+function updateCheckProgress() {
+  const items = document.querySelectorAll('.check-item');
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  const total = items.length;
+  document.getElementById('clProgressFill').style.width = (checked / total * 100) + '%';
+  document.getElementById('clProgressText').textContent = `${checked} / ${total} 完了`;
+}
+</script>
+</body>
+</html>
